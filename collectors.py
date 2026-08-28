@@ -111,26 +111,25 @@ def _collect_board(source_cfg: dict) -> list[dict]:
 
 def _collect_procurement_api(src: dict) -> list[dict]:
     """
-    data.go.kr 기반 나라장터/D2B 입찰공고 Open API 수집.
+    data.go.kr 기반 나라장터 입찰공고 Open API 수집.
     ServiceKey가 없으면 건너뜁니다 (data.go.kr에서 무료 신청 필요).
+    이미 인코딩된 키를 그대로 URL에 붙여, requests의 추가 인코딩(이중 인코딩)을 피합니다.
     """
     if not config.DATA_GO_KR_SERVICE_KEY:
         print(f"[WARN] {src['name']}: DATA_GO_KR_SERVICE_KEY 미설정으로 건너뜀")
         return []
     try:
-        params = {
-            "ServiceKey": config.DATA_GO_KR_SERVICE_KEY,
-            "numOfRows": config.MAX_ITEMS_PER_SOURCE,
-            "pageNo": 1,
-            "type": "json",
-        }
+        query_string = (
+            f"serviceKey={config.DATA_GO_KR_SERVICE_KEY}"
+            f"&numOfRows={config.MAX_ITEMS_PER_SOURCE}&pageNo=1&type=json"
+        )
         resp = requests.get(
-            src["url"], params=params, headers=config.REQUEST_HEADERS,
+            f"{src['url']}?{query_string}",
+            headers=config.REQUEST_HEADERS,
             timeout=config.REQUEST_TIMEOUT,
         )
         resp.raise_for_status()
         data = resp.json()
-        # 공공데이터포털 표준 응답 구조: response.body.items
         body = data.get("response", {}).get("body", {})
         raw_items = body.get("items", [])
         if isinstance(raw_items, dict):
@@ -143,9 +142,9 @@ def _collect_procurement_api(src: dict) -> list[dict]:
             items.append(
                 {
                     "source": src["name"],
-                    "title": it.get("bidNtceNm") or it.get("prdctClsfcNoNm") or "제목 없음",
-                    "link": it.get("bidNtceUrl", ""),
-                    "date": it.get("bidNtceDate") or it.get("opengDt", ""),
+                    "title": it.get("bidNtceNm", "제목 없음"),
+                    "link": it.get("bidNtceDtlUrl", ""),
+                    "date": it.get("bidClseDt") or it.get("bidNtceDt", ""),
                     "region": "국내",
                 }
             )
