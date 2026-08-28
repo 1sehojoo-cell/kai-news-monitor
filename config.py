@@ -45,9 +45,9 @@ PROCUREMENT_API_SOURCES = [
         "url": "https://apis.data.go.kr/1230000/ad/BidPublicInfoService/getBidPblancListInfoThng",
     },
     {
-        "name": "국내 경쟁입찰공고 상세",
+        "name": "국방전자조달_입찰공고",
         "type": "api",
-        "url": "https://apis.data.go.kr/1690000/BidPblancInfoService//getDmstcCmpetBidPblancDetail",
+        "url": "https://apis.data.go.kr/1690000/BidPblancInfoService/getDmstcCmpetBidPblancList",
     },
 ]
 
