@@ -35,14 +35,14 @@ DATA_GO_KR_SERVICE_KEY = os.environ.get("DATA_GO_KR_SERVICE_KEY", "")
 # data.go.kr Open API 기반 (type: "api")
 PROCUREMENT_API_SOURCES = [
     {
-        "name": "나라장터_입찰공고(조달청)",
+        "name": "나라장터_입찰공고(용역)",
         "type": "api",
-        "url": "https://apis.data.go.kr/1230000/ao/PubDataOpnStdService/getDataSetOpnStdBidPblancInfo",
+        "url": "https://apis.data.go.kr/1230000/ad/BidPublicInfoService/getBidPblancListInfoServc",
     },
     {
-        "name": "국방전자조달_입찰공고(방위사업청 D2B)",
+        "name": "나라장터_입찰공고(물품)",
         "type": "api",
-        "url": "https://openapi.d2b.go.kr/openapi/service/BidPblancInfoService/getDmstcCmpetBidPblancList",
+        "url": "https://apis.data.go.kr/1230000/ad/BidPublicInfoService/getBidPblancListInfoThng",
     },
 ]
 
