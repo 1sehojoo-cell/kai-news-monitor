@@ -44,6 +44,11 @@ PROCUREMENT_API_SOURCES = [
         "type": "api",
         "url": "https://apis.data.go.kr/1230000/ad/BidPublicInfoService/getBidPblancListInfoThng",
     },
+    {
+        "name": "국내 경쟁입찰공고 상세",
+        "type": "api",
+        "url": "https://apis.data.go.kr/1690000/BidPblancInfoService//getDmstcCmpetBidPblancDetail",
+    },
 ]
 
 # 게시판/공지사항 스크래핑 기반 (연구기관 과제공모)
