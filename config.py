@@ -37,12 +37,12 @@ PROCUREMENT_API_SOURCES = [
     {
         "name": "나라장터_입찰공고(조달청)",
         "type": "api",
-        "url": "http://apis.data.go.kr/1230000/ao/PubDataOpnStdService/getDataSetOpnStdBidPblancInfo",
+        "url": "https://apis.data.go.kr/1230000/ao/PubDataOpnStdService/getDataSetOpnStdBidPblancInfo",
     },
     {
         "name": "국방전자조달_입찰공고(방위사업청 D2B)",
         "type": "api",
-        "url": "http://openapi.d2b.go.kr/openapi/service/BidPblancInfoService/getDmstcCmpetBidPblancList",
+        "url": "https://openapi.d2b.go.kr/openapi/service/BidPblancInfoService/getDmstcCmpetBidPblancList",
     },
 ]
 
