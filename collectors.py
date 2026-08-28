@@ -10,6 +10,7 @@
 
 import time
 import datetime
+import xml.etree.ElementTree as ET
 import feedparser
 import requests
 from bs4 import BeautifulSoup
@@ -112,9 +113,8 @@ def _collect_board(source_cfg: dict) -> list[dict]:
 
 def _collect_procurement_api(src: dict) -> list[dict]:
     """
-    data.go.kr 기반 나라장터 입찰공고 Open API 수집.
-    ServiceKey가 없으면 건너뜁니다.
-    조회기간(inqryBgnDt~inqryEndDt)을 명시하지 않으면 0건이 반환되므로 최근 7일로 지정합니다.
+    data.go.kr 기반 나라장터/국방전자조달 입찰공고 Open API 수집.
+    API마다 JSON 또는 XML로 응답 형식이 달라, 둘 다 처리합니다.
     """
     if not config.DATA_GO_KR_SERVICE_KEY:
         print(f"[WARN] {src['name']}: DATA_GO_KR_SERVICE_KEY 미설정으로 건너뜀")
@@ -137,6 +137,36 @@ def _collect_procurement_api(src: dict) -> list[dict]:
         )
         resp.raise_for_status()
         print(f"[DEBUG] {src['name']} 응답 일부: {resp.text[:300]}")
+
+        text = resp.text.strip()
+
+        # XML로 응답하는 API 처리
+        if text.startswith("<"):
+            root = ET.fromstring(resp.text)
+            items = []
+            for item in root.findall(".//item"):
+                title = (
+                    item.findtext("bidNm")
+                    or item.findtext("bidNtceNm")
+                    or "제목 없음"
+                )
+                due = (
+                    item.findtext("bidPartcptRegistClosDt")
+                    or item.findtext("bidClseDt")
+                    or ""
+                )
+                items.append(
+                    {
+                        "source": src["name"],
+                        "title": title,
+                        "link": "",
+                        "date": due,
+                        "region": "국내",
+                    }
+                )
+            return items
+
+        # JSON으로 응답하는 API 처리 (기존 로직)
         data = resp.json()
         body = data.get("response", {}).get("body", {})
         raw_items = body.get("items", [])
