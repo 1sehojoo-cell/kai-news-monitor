@@ -9,6 +9,7 @@
 """
 
 import time
+import datetime
 import feedparser
 import requests
 from bs4 import BeautifulSoup
@@ -112,16 +113,22 @@ def _collect_board(source_cfg: dict) -> list[dict]:
 def _collect_procurement_api(src: dict) -> list[dict]:
     """
     data.go.kr 기반 나라장터 입찰공고 Open API 수집.
-    ServiceKey가 없으면 건너뜁니다 (data.go.kr에서 무료 신청 필요).
-    이미 인코딩된 키를 그대로 URL에 붙여, requests의 추가 인코딩(이중 인코딩)을 피합니다.
+    ServiceKey가 없으면 건너뜁니다.
+    조회기간(inqryBgnDt~inqryEndDt)을 명시하지 않으면 0건이 반환되므로 최근 7일로 지정합니다.
     """
     if not config.DATA_GO_KR_SERVICE_KEY:
         print(f"[WARN] {src['name']}: DATA_GO_KR_SERVICE_KEY 미설정으로 건너뜀")
         return []
     try:
+        today = datetime.datetime.now()
+        week_ago = today - datetime.timedelta(days=7)
+        begin_dt = week_ago.strftime("%Y%m%d0000")
+        end_dt = today.strftime("%Y%m%d2359")
+
         query_string = (
             f"serviceKey={config.DATA_GO_KR_SERVICE_KEY}"
             f"&numOfRows={config.MAX_ITEMS_PER_SOURCE}&pageNo=1&type=json"
+            f"&inqryDiv=1&inqryBgnDt={begin_dt}&inqryEndDt={end_dt}"
         )
         resp = requests.get(
             f"{src['url']}?{query_string}",
@@ -129,6 +136,7 @@ def _collect_procurement_api(src: dict) -> list[dict]:
             timeout=config.REQUEST_TIMEOUT,
         )
         resp.raise_for_status()
+        print(f"[DEBUG] {src['name']} 응답 일부: {resp.text[:300]}")
         data = resp.json()
         body = data.get("response", {}).get("body", {})
         raw_items = body.get("items", [])
