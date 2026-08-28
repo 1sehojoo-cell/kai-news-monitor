@@ -14,6 +14,10 @@ GOOGLE_NEWS_QUERIES = [
     "방위산업 국산 무기체계",
     "K-방산 수출",
     "국방 AI 국방혁신",
+    "국방 무인기 드론",
+    "국방 위성 우주"
+    "유무인복합체계 MUM-T"
+    "국방 전자전",
 ]
 GOOGLE_NEWS_RSS_TEMPLATE = (
     "https://news.google.com/rss/search?q={query}&hl=ko&gl=KR&ceid=KR:ko"
