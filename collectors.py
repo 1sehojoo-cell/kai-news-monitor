@@ -21,6 +21,10 @@ from urllib.parse import quote
 import config
 import source_health
 
+_session = requests.Session()
+_retry = Retry(total=2, backoff_factor=1, status_forcelist=[429, 500, 502, 503, 504])
+_session.mount("https://", HTTPAdapter(max_retries=_retry))
+_session.mount("http://", HTTPAdapter(max_retries=_retry))
 
 def _get(url: str) -> requests.Response | None:
     try:
