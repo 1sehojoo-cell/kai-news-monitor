@@ -4,7 +4,7 @@ on:
   schedule:
     # UTC 기준 23:00 == KST 08:00 (평일: 월~금 UTC 기준 전날 밤이므로 요일 매핑 주의)
     # 아래는 KST 월~금 08:00에 맞춘 cron (UTC 일~목 23:00)
-    - cron: "0 23 * * 0-4"
+    - cron: "0 22 * * 0-4"
   workflow_dispatch: {}  # 수동 실행 버튼
 
 jobs:
