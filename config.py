@@ -21,7 +21,12 @@ GOOGLE_NEWS_QUERIES = [
     "LIG D&A 방산"
     "한화에어로스페이스 우주 AI 무인기 드론"
     "대한항공 AI 무인기 드론"
-    "풍산 드론",
+    "풍산 드론"
+    "육군"
+    "공군"
+    "해군"
+    "국방부"
+    "방위사업청",
 ]
 GOOGLE_NEWS_RSS_TEMPLATE = (
     "https://news.google.com/rss/search?q={query}&hl=ko&gl=KR&ceid=KR:ko"
