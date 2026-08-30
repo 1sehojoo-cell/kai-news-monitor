@@ -95,7 +95,7 @@ DOMESTIC_TRADE_SOURCES = [
     {
         "name": "K-디펜스뉴스",
         "type": "rss",
-        "url": "https://kdefensenews.com/rss/allArticle.xml",
+        "url": "http://kdefensenews.com/rss_view.php",
     },
 ]
 
