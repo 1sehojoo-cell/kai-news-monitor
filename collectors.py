@@ -28,7 +28,7 @@ _session.mount("http://", HTTPAdapter(max_retries=_retry))
 
 def _get(url: str) -> requests.Response | None:
     try:
-        resp = requests.get(
+        resp = _session.get(
             url, headers=config.REQUEST_HEADERS, timeout=config.REQUEST_TIMEOUT
         )
         resp.raise_for_status()
@@ -136,7 +136,7 @@ def _collect_procurement_api(src: dict) -> list[dict]:
             f"&numOfRows={config.MAX_ITEMS_PER_SOURCE}&pageNo=1&type=json"
             f"&inqryDiv=1&inqryBgnDt={begin_dt}&inqryEndDt={end_dt}"
         )
-        resp = requests.get(
+        resp = _session.get(
             f"{src['url']}?{query_string}",
             headers=config.REQUEST_HEADERS,
             timeout=config.REQUEST_TIMEOUT,
