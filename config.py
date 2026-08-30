@@ -17,7 +17,11 @@ GOOGLE_NEWS_QUERIES = [
     "국방 무인기 드론",
     "국방 위성 우주"
     "유무인복합체계 MUM-T"
-    "국방 전자전",
+    "국방 전자전"
+    "LIG D&A 방산"
+    "한화에어로스페이스 우주 AI 무인기 드론"
+    "대한항공 AI 무인기 드론"
+    "풍산 드론",
 ]
 GOOGLE_NEWS_RSS_TEMPLATE = (
     "https://news.google.com/rss/search?q={query}&hl=ko&gl=KR&ceid=KR:ko"
@@ -162,55 +166,7 @@ OVERSEAS_TRADE_SOURCES = [
 ]
 
 # ============================================================
-# 3. 경쟁업체 (국내 4개사)
-#    해외 경쟁사 동향은 별도 스크래핑 대신 위 OVERSEAS_TRADE_SOURCES(해외 전문매체) +
-#    US_MILITARY_SOURCES(미군 각 군 보도자료)를 통해 커버합니다.
-# ============================================================
-COMPETITOR_SOURCES = [
-    {
-        "name": "한화에어로스페이스",
-        "type": "board",
-        "url": "https://www.hanwhaaerospace.com/kor/media/newsroom/list.do",
-        "list_selector": "ul.news-list li",
-        "title_selector": "a .title",
-        "link_selector": "a",
-        "date_selector": "a .date",
-        "region": "국내",
-    },
-    {
-        "name": "대한항공_뉴스룸(항공우주사업)",
-        "type": "board",
-        "url": "https://news.koreanair.com/",
-        "list_selector": "article.post, div.post-item",
-        "title_selector": "h2 a, h3 a",
-        "link_selector": "h2 a, h3 a",
-        "date_selector": "time, span.date",
-        "region": "국내",
-    },
-    {
-        "name": "LIG D&A(구 LIG넥스원)",
-        "type": "board",
-        "url": "https://www.ligdefenseaerospace.com/news/nex1newsList.do",
-        "list_selector": "table.board-list tbody tr",
-        "title_selector": "td.title a",
-        "link_selector": "td.title a",
-        "date_selector": "td.date",
-        "region": "국내",
-    },
-    {
-        "name": "풍산_방산부문",
-        "type": "board",
-        "url": "https://www.poongsan.co.kr/company/promotion/news",  # 실제 보도자료 게시판 하위 경로는 접속 후 재확인 필요
-        "list_selector": "table.board-list tbody tr",
-        "title_selector": "td.title a",
-        "link_selector": "td.title a",
-        "date_selector": "td.date",
-        "region": "국내",
-    },
-]
-
-# ============================================================
-# 3-1. 해외 경쟁사 동향 - 미군 각 군 보도자료 (해외 전문매체와 함께 ①해외 동향에 반영)
+# 3. 해외 경쟁사 동향 - 미군 각 군 보도자료 (해외 전문매체와 함께 ①해외 동향에 반영)
 # ============================================================
 US_MILITARY_SOURCES = [
     {
