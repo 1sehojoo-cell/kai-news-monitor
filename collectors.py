@@ -13,6 +13,8 @@ import datetime
 import xml.etree.ElementTree as ET
 import feedparser
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from bs4 import BeautifulSoup
 from urllib.parse import quote
 
