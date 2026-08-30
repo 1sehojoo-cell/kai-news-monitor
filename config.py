@@ -54,15 +54,6 @@ PROCUREMENT_API_SOURCES = [
 # 게시판/공지사항 스크래핑 기반 (연구기관 과제공모)
 GOV_SOURCES = [
     {
-        "name": "방위사업청_보도자료",
-        "type": "board",
-        "url": "https://www.dapa.go.kr/dapa/na/ntt/selectNttList.do?bbsId=316",
-        "list_selector": "table.board-list tbody tr",
-        "title_selector": "td.title a",
-        "link_selector": "td.title a",
-        "date_selector": "td.date",
-    },
-    {
         "name": "국방기술진흥연구소(국기연)_공지사항",
         "type": "board",
         "url": "https://www.krit.re.kr/krit/bbs/notice_list.do?gotoMenuNo=05010000",
@@ -72,27 +63,9 @@ GOV_SOURCES = [
         "date_selector": "td.date",
     },
     {
-        "name": "국기연_과제관리시스템(PMS) 공모",
-        "type": "board",
-        "url": "https://pms.krit.re.kr",  # 실제 공모 게시판 하위 경로는 접속 후 재확인 필요
-        "list_selector": "table.board-list tbody tr",
-        "title_selector": "td.title a",
-        "link_selector": "td.title a",
-        "date_selector": "td.date",
-    },
-    {
-        "name": "민군협력진흥원(민진원)_공지사항",
-        "type": "board",
-        "url": "https://www.icmtc.re.kr",  # 실제 공지 게시판 하위 경로는 접속 후 재확인 필요
-        "list_selector": "table.board-list tbody tr",
-        "title_selector": "td.title a",
-        "link_selector": "td.title a",
-        "date_selector": "td.date",
-    },
-    {
         "name": "국방과학연구소(국과연/ADD)_공지사항",
         "type": "board",
-        "url": "https://www.add.re.kr/kps",
+        "url": "https://www.add.re.kr/board?menuId=MENU02198&siteId=null",
         "list_selector": "table.board-list tbody tr",
         "title_selector": "td.title a",
         "link_selector": "td.title a",
@@ -106,43 +79,19 @@ GOV_SOURCES = [
 # ============================================================
 DOMESTIC_TRADE_SOURCES = [
     {
-        "name": "국방일보",
-        "type": "rss",
-        "url": "https://kookbang.dema.mil.kr/newsWeb/rss.do",
-    },
-    {
-        "name": "디펜스타임즈코리아",
-        "type": "rss",
-        "url": "https://www.defensetimes.kr/rss/allArticle.xml",
-    },
-    {
         "name": "디펜스투데이",
         "type": "rss",
-        "url": "https://www.defensetoday.co.kr/rss/allArticle.xml",
+        "url": "https://www.defensetoday.kr/rss/allArticle.xml",
     },
     {
-        "name": "월간 디펜스타임즈",
+        "name": "데일리방산",
         "type": "rss",
-        "url": "https://www.dtimes.co.kr/rss/allArticle.xml",
+        "url": "https://www.dailydefense.co.kr/rss/allArticle.xml",
     },
     {
-        "name": "무기박사(무기체계 전문)",
+        "name": "K-디펜스뉴스",
         "type": "rss",
-        "url": "https://www.weaponsdaily.com/rss/allArticle.xml",
-    },
-    {
-        "name": "연합뉴스_방위산업",
-        "type": "rss",
-        "url": "https://www.yna.co.kr/rss/defense.xml",
-    },
-    {
-        "name": "뉴스1_방산",
-        "type": "board",
-        "url": "https://www.news1.kr/industry/defense",
-        "list_selector": "div.list_wrap li",
-        "title_selector": "a .tit",
-        "link_selector": "a",
-        "date_selector": "span.date",
+        "url": "https://kdefensenews.com/rss/allArticle.xml",
     },
 ]
 
@@ -221,7 +170,7 @@ COMPETITOR_SOURCES = [
     {
         "name": "한화에어로스페이스",
         "type": "board",
-        "url": "https://www.hanwhaaerospace.co.kr/ko/newsroom/news/news-list.do",
+        "url": "https://www.hanwhaaerospace.com/kor/media/newsroom/list.do",
         "list_selector": "ul.news-list li",
         "title_selector": "a .title",
         "link_selector": "a",
@@ -231,7 +180,7 @@ COMPETITOR_SOURCES = [
     {
         "name": "대한항공_뉴스룸(항공우주사업)",
         "type": "board",
-        "url": "https://news.koreanair.com/tag/%EB%AC%B4%EC%9D%B8%ED%95%AD%EA%B3%B5%EA%B8%B0/",
+        "url": "https://news.koreanair.com/",
         "list_selector": "article.post, div.post-item",
         "title_selector": "h2 a, h3 a",
         "link_selector": "h2 a, h3 a",
@@ -241,7 +190,7 @@ COMPETITOR_SOURCES = [
     {
         "name": "LIG D&A(구 LIG넥스원)",
         "type": "board",
-        "url": "https://www.lignex1.com/kr/pr/press.do",
+        "url": "https://www.ligdefenseaerospace.com/news/nex1newsList.do",
         "list_selector": "table.board-list tbody tr",
         "title_selector": "td.title a",
         "link_selector": "td.title a",
@@ -251,7 +200,7 @@ COMPETITOR_SOURCES = [
     {
         "name": "풍산_방산부문",
         "type": "board",
-        "url": "https://www.poongsan.co.kr",  # 실제 보도자료 게시판 하위 경로는 접속 후 재확인 필요
+        "url": "https://www.poongsan.co.kr/company/promotion/news",  # 실제 보도자료 게시판 하위 경로는 접속 후 재확인 필요
         "list_selector": "table.board-list tbody tr",
         "title_selector": "td.title a",
         "link_selector": "td.title a",
