@@ -11,6 +11,7 @@ from email.mime.text import MIMEText
 
 import config
 
+KST = datetime.timezone(datetime.timedelta(hours=9))
 
 def send_html_email(html_body: str) -> None:
     if not (config.SMTP_USER and config.SMTP_PASSWORD and config.MAIL_TO):
@@ -18,7 +19,7 @@ def send_html_email(html_body: str) -> None:
             "SMTP_USER / SMTP_PASSWORD / MAIL_TO 환경변수가 모두 설정되어야 합니다."
         )
 
-    today = datetime.date.today().strftime("%Y-%m-%d")
+    today = datetime.datetime.now(KST).strftime("%Y년 %m월 %d일")
     subject = f"{config.MAIL_SUBJECT_PREFIX} {today}"
 
     msg = MIMEMultipart("mixed")
