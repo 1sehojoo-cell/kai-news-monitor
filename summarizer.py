@@ -12,6 +12,8 @@ import anthropic
 
 import config
 
+KST = datetime.timezone(datetime.timedelta(hours=9))
+
 SYSTEM_PROMPT = """\
 당신은 한국항공우주산업(KAI) 미래융합기술원의 방산동향 브리핑 작성자입니다.
 아래 제공되는 원문 목록(해외 방산 뉴스, 방위사업청/국방부 보도자료 및 입찰공고,
@@ -81,7 +83,7 @@ def _format_items_for_prompt(items: list[dict], label: str) -> str:
 
 
 def build_prompt(collected: dict[str, list[dict]]) -> str:
-    today = datetime.date.today().strftime("%Y년 %m월 %d일")
+    today = datetime.datetime.now(KST).strftime("%Y년 %m월 %d일")
     parts = [f"오늘 날짜: {today}\n"]
     parts.append(_format_items_for_prompt(collected.get("gov", []), "정부/연구기관 공지 소스 (국기연·민진원·국과연·방사청)"))
     parts.append(
