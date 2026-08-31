@@ -3,9 +3,10 @@
 summarizer가 생성한 JSON 데이터를 template.html(고정 틀)에 채워
 최종 HTML 브리핑을 만듭니다.
 """
-
 import datetime
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+
+KST = datetime.timezone(datetime.timedelta(hours=9))
 
 
 def render_briefing(data: dict) -> str:
@@ -14,15 +15,14 @@ def render_briefing(data: dict) -> str:
         autoescape=select_autoescape(["html"]),
     )
     template = env.get_template("template.html")
-
-    today = datetime.date.today()
+    now_kst = datetime.datetime.now(KST)
+    today = now_kst.date()
     week_ago = today - datetime.timedelta(days=7)
-
     return template.render(
         report_date=today.strftime("%Y.%m.%d (%a)").replace(
             *_weekday_kr(today)
         ),
-        report_datetime=today.strftime("%Y.%m.%d %H:%M"),
+        report_datetime=now_kst.strftime("%Y.%m.%d %H:%M"),
         period=f"{week_ago.strftime('%Y.%m.%d')} ~ {today.strftime('%Y.%m.%d')} (최근 1주일)",
         overseas=data["overseas"],
         gov_orgs=data["gov_orgs"],
